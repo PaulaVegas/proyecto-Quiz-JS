@@ -32,6 +32,7 @@ nextButton.addEventListener('click', () => {
 });
 
 function endGame() {
+    console.log('Game Over!');
     startButton.classList.remove('hide');
     questionContainer.classList.add('hide');
     currentQuestionIndex = 0;
@@ -61,6 +62,7 @@ async function fetchAPIQuestions() {
         };
     });
 }
+
 function showQuestion(item) {
     questionElement.innerText = item.question;
     item.answers.forEach(answer => {
@@ -107,6 +109,7 @@ function selectAnswer(element) {
     } else {
         startButton.innerText = 'Restart';
         startButton.classList.remove('hide');
+        localStorage.setItem('quizResults', JSON.stringify(quizResults));
         console.log('Resultados:', quizResults);
     }
 }
