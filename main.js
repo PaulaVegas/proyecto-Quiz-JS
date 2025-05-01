@@ -11,10 +11,6 @@ let quizResults = [];
 let questionList = [];
 
 console.log('Quiz App Loaded!');
-console.log('API URL:', API_URL);
-console.log('Current Question Index:', currentQuestionIndex);
-console.log('Quiz Results:', quizResults);
-console.log('Question List:', questionList);
 
 async function startGame() {
     startButton.classList.add('hide');
@@ -28,8 +24,20 @@ async function startGame() {
 startButton.addEventListener('click', startGame);
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++;
-    setNextQuestion();
+    if (currentQuestionIndex < questionList.length) {
+        setNextQuestion();
+    } else {
+        endGame();
+    }
 });
+
+function endGame() {
+    startButton.classList.remove('hide');
+    questionContainer.classList.add('hide');
+    currentQuestionIndex = 0;
+    quizResults = [];
+    questionList = [];
+}
 
 async function fetchAPIQuestions() {
     const response = await fetch(API_URL);
