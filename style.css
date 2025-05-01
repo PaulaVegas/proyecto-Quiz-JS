@@ -3,3 +3,15 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.hide {
+    display: none;
+}
+
+.color-correct {
+    background-color: green;
+}
+
+.color-wrong {
+    background-color: red;
+}

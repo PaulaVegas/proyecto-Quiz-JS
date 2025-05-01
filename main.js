@@ -1,73 +1,121 @@
-//      Posible reparto de tareas:
-//      ELIDA:
+const startButton = document.getElementById('startButton');
+const nextButton = document.getElementById('nextButton');
+const questionContainer = document.getElementById('questionContainer');
+const questionElement = document.getElementById('question');
+const answerButtonsElement = document.getElementById('answerButtons');
 
-// Estructurar el home.html (botones, contenedores, clases)
+const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple';
 
-// Encargarse del style.css (bootstrap, estilos propios)
+let currentQuestionIndex;
+let quizResults = [];
+let questionList = [];
 
-//Encargarse del mobile first y responsive
+console.log('Quiz App Loaded!');
+console.log('API URL:', API_URL);
+console.log('Current Question Index:', currentQuestionIndex);
+console.log('Quiz Results:', quizResults);
+console.log('Question List:', questionList);
 
-// Insertar preguntas manuales (questions.js)
+async function startGame() {
+    startButton.classList.add('hide');
+    currentQuestionIndex = 0;
+    quizResults = [];
+    questionList = await fetchAPIQuestions();
+    questionContainer.classList.remove('hide');
+    setNextQuestion();
+}
 
-// Creación del home.html
+startButton.addEventListener('click', startGame);
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++;
+    setNextQuestion();
+});
 
-// Repartición de funciones.
+async function fetchAPIQuestions() {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    return data.results.map(question => {
+        const answers = [
+            ...question.incorrect_answers.map(ans => ({
+                text: decodeHTML(ans),
+                correct: false,
+            })),
+            {
+                text: decodeHTML(question.correct_answer),
+                correct: true,
+            },
+        ];
 
-//      PAULA:
+        return {
+            question: decodeHTML(question.question),
+            answers: shuffleArray(answers),
+            correctAnswer: decodeHTML(question.correct_answer),
+        };
+    });
+}
+function showQuestion(item) {
+    questionElement.innerText = item.question;
+    item.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerText = answer.text;
+        button.classList.add('btn'); //para agregar la clase btn a los botones bootstrap
+        if (answer.correct) {
+            button.dataset.correct = true;
+        }
+        button.addEventListener('click', selectAnswer);
+        answerButtonsElement.appendChild(button);
+    });
+}
 
-// Lógica de la API (fetch, formateo de datos, etc.)
+function setNextQuestion() {
+    resetState();
+    showQuestion(questionList[currentQuestionIndex]);
+}
 
-// Creación de question y results.html
+function setStatusClass(element) {
+    if (element.dataset.correct === 'true') {
+        element.classList.add('color-correct');
+    } else {
+        element.classList.add('color-wrong');
+    }
+}
 
-// Organización en GITHUB
+function selectAnswer(element) {
+    const selectedButton = element.target;
+    const correct = selectedButton.dataset.correct === 'true';
 
-// AMBAS:
+    quizResults.push({
+        question: questionList[currentQuestionIndex].question,
+        selected: selectedButton.innerText,
+        correct: correct,
+    });
 
-// Revisar el código y la lógica de cada una para que no haya errores.
-// Revisar el CSS y HTML para que no haya conflictos entre ambas (clases, ids, etc.)
-// Refactorizar el código si es necesario.
-// Comentar el código para que sea entendible para ambas.
-// Código limpio y ordenado.
+    Array.from(answerButtonsElement.children).forEach(button => {
+        setStatusClass(button);
+    });
 
-//   !!!!PSEUDOCODIGO!!!!
+    if (questionList.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove('hide');
+    } else {
+        startButton.innerText = 'Restart';
+        startButton.classList.remove('hide');
+        console.log('Resultados:', quizResults);
+    }
+}
 
-// async function fetchAPIQuestions():
-//   fetch from api
-//   format API data to match local structure
-//   return as array
+function resetState() {
+    nextButton.classList.add('hide');
+    while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild);
+    }
+}
 
-// on startButton click:
-//   call startGame()
+function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
 
-// function startGame():
-//   load local + API questions (call getAllQuestions)
-//   shuffle questions
-//   set currentQuestionIndex = 0
-//   show next question
-
-// function showQuestion():
-//   render question and answers in DOM
-
-// function handleAnswer():
-//   check if correct
-//   save result
-//   show feedback
-//   show Next button
-
-// on nextButton click:
-//   currentQuestionIndex++
-//   if more questions → show next
-//   else → show results
-
-// function saveResultsToStorage(data):
-//   localStorage.setItem("quizResults", JSON.stringify(data))
-
-// function getResultsFromStorage():
-//   return JSON.parse(localStorage.getItem("quizResults"))
-
-//   function showResults():
-//   show total score
-//   optionally draw graph
-
-// function drawChart(data):
-//   render CHART
+function decodeHTML(html) {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+}
