@@ -1,18 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Home</title>
-		<link rel="stylesheet" href="style.css" />
-		<script src="main.js" defer></script>
-	</head>
-	<body>
-		<h2>Página de bienvenida + gráfica de últimos resultados</h2>
-		<nav>
-			<a href="home.html">Home</a>
-			<a href="question.html">Questions</a>
-			<a href="results.html">Results</a>
-		</nav>
-	</body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz SPA</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <nav>
+        <ul class="nav">
+          <li><button id="nav-home">Inicio</button></li>
+          <li><button id="nav-quiz">Quiz</button></li>
+          <li><button id="nav-results">Resultados</button></li>
+        </ul>
+      </nav>
+
+  <!-- VISTA 1: Home -->
+  <section id="home">
+    <h1>¡Bienvenida al Quiz!</h1>
+    <p>¿Estás lista para jugar?</p>
+    <canvas id="resultsChart" width="300" height="200"></canvas>
+    <button id="start-btn">Comenzar Quiz</button>
+  </section>
+
+  <!-- VISTA 2: Preguntas -->
+  <section id="quiz" class="hide">
+    <div id="question">Aquí va la pregunta</div>
+    <div id="answer-buttons" class="btn-grid"></div>
+    <button id="next-btn" class="hide">Siguiente</button>
+  </section>
+
+  <!-- VISTA 3: Resultados -->
+  <section id="results" class="hide">
+    <p>Tu puntuación es: <span id="score"></span>/10</p>
+    <button id="go-home">Volver al inicio</button>
+  </section>
+
+  <footer>
+    <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
+  </footer>
+
+  <!-- Lógica principal SPA -->
+  <script type="module">
+    import { getQuestionsFromAPI } from './js/api.js'
+
+    const homeView = document.getElementById('home')
+    const quizView = document.getElementById('quiz')
+    const resultsView = document.getElementById('results')
+
+    const startBtn = document.getElementById('start-btn')
+    const nextBtn = document.getElementById('next-btn')
+    const goHomeBtn = document.getElementById('go-home')
+    const questionEl = document.getElementById('question')
+    const answerButtonsEl = document.getElementById('answer-buttons')
+    const scoreSpan = document.getElementById('score')
+
+    let questions = []
+    let currentQuestionIndex = 0
+    let score = 0
+
+    function showView(view) {
+      homeView.classList.add('hide')
+      quizView.classList.add('hide')
+      resultsView.classList.add('hide')
+      view.classList.remove('hide')
+    }
+
+    startBtn.addEventListener('click', async () => {
+      showView(quizView)
+      currentQuestionIndex = 0
+      score = 0
+      questions = await getQuestionsFromAPI()
+      if (questions.length === 0) {
+        alert("No se pudieron cargar preguntas.")
+        showView(homeView)
+        return
+      }
+      setNextQuestion()
+    })
+
+    nextBtn.addEventListener('click', () => {
+      currentQuestionIndex++
+      setNextQuestion()
+    })
+
+    goHomeBtn.addEventListener('click', () => {
+      showChart()
+      showView(homeView)
+    })
+
+    function setNextQuestion() {
+      resetState()
+      showQuestion(questions[currentQuestionIndex])
+    }
+
+    function showQuestion(question) {
+      questionEl.innerText = question.question
+      question.answers.forEach(answer => {
+        const button = document.createElement('button')
+        button.innerText = answer.text
+        button.classList.add('btn')
+        if (answer.correct) button.dataset.correct = true
+        button.addEventListener('click', selectAnswer)
+        answerButtonsEl.appendChild(button)
+      })
+    }
+
+    function resetState() {
+      nextBtn.classList.add('hide')
+      while (answerButtonsEl.firstChild) {
+        answerButtonsEl.removeChild(answerButtonsEl.firstChild)
+      }
+    }
+
+    function selectAnswer(e) {
+      const selected = e.target
+      const correct = selected.dataset.correct === 'true'
+      if (correct) score++
+
+      Array.from(answerButtonsEl.children).forEach(btn => {
+        btn.disabled = true
+        btn.classList.add(btn.dataset.correct === 'true' ? 'correct' : 'wrong')
+      })
+
+      if (questions.length > currentQuestionIndex + 1) {
+        nextBtn.classList.remove('hide')
+      } else {
+        // Guardar puntuación y mostrar resultados
+        const history = JSON.parse(localStorage.getItem('history')) || []
+        history.push({ date: new Date().toLocaleDateString(), score })
+        localStorage.setItem('history', JSON.stringify(history))
+        scoreSpan.innerText = score
+        setTimeout(() => showView(resultsView), 1000)
+      }
+    }
+
+    // Mostrar gráfica
+    function showChart() {
+      const ctx = document.getElementById('resultsChart').getContext('2d')
+      const data = JSON.parse(localStorage.getItem('history')) || []
+      const fechas = data.map(item => item.date)
+      const puntuaciones = data.map(item => item.score)
+
+      if (window.myChart) {
+        window.myChart.destroy()
+      }
+
+      if (data.length > 0) {
+        window.myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: fechas,
+            datasets: [{
+              label: 'Puntuación',
+              data: puntuaciones,
+              backgroundColor: '#3498db'
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 10
+              }
+            }
+          }
+        })
+      }
+    }
+// 👇 Navegación por barra
+document.getElementById('nav-home').addEventListener('click', () => {
+  showChart()
+  showView(homeView)
+})
+
+document.getElementById('nav-quiz').addEventListener('click', async () => {
+  currentQuestionIndex = 0
+  score = 0
+  questions = await getQuestionsFromAPI()
+  if (questions.length === 0) {
+    alert("No se pudieron cargar preguntas.")
+    return
+  }
+  showView(quizView)
+  setNextQuestion()
+})
+
+document.getElementById('nav-results').addEventListener('click', () => {
+  scoreSpan.innerText = score
+  showView(resultsView)
+})
+
+
+    // Mostrar gráfica al cargar por primera vez
+    showChart()
+  </script>
+</body>
 </html>

@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Questions</title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
-    <body>
-        <h2>SPA. Página para renderizar las 10 distintas preguntas</h2>
-        <nav>
-            <a href="home.html">Home</a>
-            <a href="question.html">Questions</a>
-            <a href="results.html">Results</a>
-        </nav>
-        <section id="questionContainer" class="hide">
-            <div id="question">Question</div>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Preguntas</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header>
+    <h1>Preguntas del Quiz</h1>
+  </header>
 
-            <div id="answerButtons"></div>
-        </section>
+  <main>
+    <section id="question-container" class="hide">
+      <div id="question">Aquí va la pregunta</div>
+      <div id="answer-buttons" class="btn-grid"></div>
+    </section>
 
-        <div class="controls">
-            <button id="startButton">Start!</button>
-            <button id="nextButton" class="hide">Next</button>
-        </div>
+    <div class="controls">
+      <button id="start-btn">Comenzar</button>
+      <button id="next-btn" class="hide">Siguiente</button>
+    </div>
+  </main>
 
-        <script src="main.js" defer></script>
-    </body>
+  <footer>
+    <p>Proyecto JS SPA - Quiz</p>
+  </footer>
+
+  <script type="module" src="./main.js"></script>
+
+</body>
 </html>

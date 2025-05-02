@@ -1,17 +1,129 @@
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+  }
 
-.hide {
+  nav {
+    background-color: #333;
+    padding: 10px;
+  }
+  
+  .nav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .nav li {
+    display: inline;
+  }
+  
+  .nav button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .nav button:hover {
+    color: #00acee;
+  }
+  
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  /* Estructura principal */
+  header, main, footer {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  .btn-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+  }
+  
+  .btn:hover {
+    background-color: #d0e1f9;
+  }
+  
+  /* Correcta / Incorrecta */
+  .correct {
+    background-color: #2ecc71 !important;
+    color: white;
+  }
+  
+  .wrong {
+    background-color: #e74c3c !important;
+    color: white;
+  }
+
+
+  @media (max-width: 600px) {
+    button {
+      width: 100%;
+      font-size: 1rem;
+    }
+  
+    .btn-grid {
+      width: 100%;
+    }
+  
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+  }
+  
+  .hide {
     display: none;
-}
-
-.color-correct {
-    background-color: green;
-}
-
-.color-wrong {
-    background-color: red;
-}
+  }
+  
