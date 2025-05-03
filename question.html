@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quiz Preguntas</title>
-  <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
-  <header>
-    <h1>Preguntas del Quiz</h1>
-  </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quiz Preguntas</title>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <nav>
+            <ul class="nav">
+                <li>
+                    <a href="home.html" id="nav-home" class="nav-btn">Home</a>
+                </li>
+                <li>
+                    <a href="results.html" id="nav-results" class="nav-btn"
+                        >Resultados</a
+                    >
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Preguntas del Quiz</h1>
+        </header>
 
-  <main>
-    <section id="question-container" class="hide">
-      <div id="question">Aquí va la pregunta</div>
-      <div id="answer-buttons" class="btn-grid"></div>
-    </section>
+        <main>
+            <section id="quiz" class="view">
+                <h2 id="question-number">
+                    Pregunta <span id="current-question">1</span> de 10
+                </h2>
+                <div id="question-container">
+                    <div id="question">Aquí va la pregunta</div>
+                    <div id="answer-buttons" class="btn-grid"></div>
+                </div>
+                <button id="next-btn" class="hide">Siguiente</button>
+            </section>
+        </main>
+        <footer>
+            <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
+        </footer>
 
-    <div class="controls">
-      <button id="start-btn">Comenzar</button>
-      <button id="next-btn" class="hide">Siguiente</button>
-    </div>
-  </main>
-
-  <footer>
-    <p>Proyecto JS SPA - Quiz</p>
-  </footer>
-
-  <script type="module" src="./main.js"></script>
-
-</body>
+        <script type="module" src="./js/main.js"></script>
+    </body>
 </html>

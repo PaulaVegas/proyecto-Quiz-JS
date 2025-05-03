@@ -1,132 +1,178 @@
-const startButton = document.getElementById('startButton');
-const nextButton = document.getElementById('nextButton');
-const questionContainer = document.getElementById('questionContainer');
-const questionElement = document.getElementById('question');
-const answerButtonsElement = document.getElementById('answerButtons');
+import { getQuestionsFromAPI } from './data.js';
+console.log('main.js enganchado, menos mal');
 
-const API_URL = 'https://opentdb.com/api.php?amount=10&type=multiple';
+const currentPage = window.location.pathname;
 
-let currentQuestionIndex;
-let quizResults = [];
-let questionList = [];
+if (
+    currentPage.includes('home.html') ||
+    currentPage === '/' ||
+    currentPage.endsWith('index.html')
+) {
+    const canvas = document.getElementById('historyChart');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const history = JSON.parse(localStorage.getItem('history')) || [];
 
-console.log('Quiz App Loaded!');
+        // Limpiar canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-async function startGame() {
-    startButton.classList.add('hide');
-    currentQuestionIndex = 0;
-    quizResults = [];
-    questionList = await fetchAPIQuestions();
-    questionContainer.classList.remove('hide');
-    setNextQuestion();
-}
+        // Parámetros del gráfico
+        const padding = 30;
+        const barWidth = 30;
+        const maxScore = 10;
+        const spacing = 10;
+        const chartHeight = canvas.height - padding * 2;
 
-startButton.addEventListener('click', startGame);
-nextButton.addEventListener('click', () => {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questionList.length) {
-        setNextQuestion();
-    } else {
-        endGame();
+        // Calcular escala
+        const maxBars = history.length;
+        const totalWidth = maxBars * (barWidth + spacing);
+        const offsetX = (canvas.width - totalWidth) / 2;
+
+        // Dibujar barras
+        history.forEach((entry, index) => {
+            const x = offsetX + index * (barWidth + spacing);
+            const barHeight = (entry.score / maxScore) * chartHeight;
+            const y = canvas.height - padding - barHeight;
+
+            // Dibujar barra
+            ctx.fillStyle = '#4a90e2';
+            ctx.fillRect(x, y, barWidth, barHeight);
+
+            // Etiqueta de fecha
+            ctx.fillStyle = '#000';
+            ctx.font = '10px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(entry.date, x + barWidth / 2, canvas.height - 10);
+        });
+
+        // Eje Y
+        ctx.beginPath();
+        ctx.moveTo(padding, padding);
+        ctx.lineTo(padding, canvas.height - padding);
+        ctx.stroke();
     }
-});
 
-function endGame() {
-    console.log('Game Over!');
-    startButton.classList.remove('hide');
-    questionContainer.classList.add('hide');
-    currentQuestionIndex = 0;
-    quizResults = [];
-    questionList = [];
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            window.location.href = 'question.html';
+        });
+    }
 }
+if (currentPage.includes('question.html')) {
+    const homeView = document.getElementById('home');
+    const quizView = document.getElementById('quiz');
+    const resultsView = document.getElementById('results');
 
-async function fetchAPIQuestions() {
-    const response = await fetch(API_URL);
-    const data = await response.json();
-    return data.results.map(question => {
-        const answers = [
-            ...question.incorrect_answers.map(ans => ({
-                text: decodeHTML(ans),
-                correct: false,
-            })),
-            {
-                text: decodeHTML(question.correct_answer),
-                correct: true,
-            },
-        ];
+    const startBtn = document.getElementById('start-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const goHomeBtn = document.getElementById('go-home');
+    const questionEl = document.getElementById('question');
+    const answerButtonsEl = document.getElementById('answer-buttons');
+    const scoreSpan = document.getElementById('score');
+    const currentQuestionSpan = document.getElementById('current-question');
 
-        return {
-            question: decodeHTML(question.question),
-            answers: shuffleArray(answers),
-            correctAnswer: decodeHTML(question.correct_answer),
-        };
-    });
-}
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
 
-function showQuestion(item) {
-    questionElement.innerText = item.question;
-    item.answers.forEach(answer => {
-        const button = document.createElement('button');
-        button.innerText = answer.text;
-        button.classList.add('btn'); //para agregar la clase btn a los botones bootstrap
-        if (answer.correct) {
-            button.dataset.correct = true;
+    function showView(view) {
+        homeView?.classList.add('hide');
+        quizView?.classList.add('hide');
+        resultsView?.classList.add('hide');
+        view?.classList.remove('hide');
+    }
+
+    async function initializeQuiz() {
+        showView(quizView);
+        currentQuestionIndex = 0;
+        score = 0;
+        questions = await getQuestionsFromAPI();
+
+        if (questions.length === 0) {
+            alert('No se pudieron cargar preguntas.');
+            showView(homeView);
+            return;
         }
-        button.addEventListener('click', selectAnswer);
-        answerButtonsElement.appendChild(button);
-    });
-}
 
-function setNextQuestion() {
-    resetState();
-    showQuestion(questionList[currentQuestionIndex]);
-}
-
-function setStatusClass(element) {
-    if (element.dataset.correct === 'true') {
-        element.classList.add('color-correct');
-    } else {
-        element.classList.add('color-wrong');
+        prepareNextQuestion();
     }
-}
 
-function selectAnswer(element) {
-    const selectedButton = element.target;
-    const correct = selectedButton.dataset.correct === 'true';
+    function prepareNextQuestion() {
+        resetState();
+        if (currentQuestionSpan) {
+            currentQuestionSpan.innerText = currentQuestionIndex + 1;
+        }
+        displayQuestion(questions[currentQuestionIndex]);
+    }
 
-    quizResults.push({
-        question: questionList[currentQuestionIndex].question,
-        selected: selectedButton.innerText,
-        correct: correct,
+    function displayQuestion(question) {
+        questionEl.innerText = question.question;
+        question.answers.forEach(answer => {
+            const button = document.createElement('button');
+            button.innerText = answer.text;
+            button.classList.add('btn');
+            if (answer.correct) button.dataset.correct = true;
+            button.addEventListener('click', selectAnswer);
+            answerButtonsEl.appendChild(button);
+        });
+    }
+
+    function resetState() {
+        nextBtn.classList.add('hide');
+        while (answerButtonsEl.firstChild) {
+            answerButtonsEl.removeChild(answerButtonsEl.firstChild);
+        }
+    }
+
+    function selectAnswer(e) {
+        const selected = e.target;
+        const correct = selected.dataset.correct === 'true';
+        if (correct) score++;
+
+        Array.from(answerButtonsEl.children).forEach(btn => {
+            btn.disabled = true;
+            btn.classList.add(
+                btn.dataset.correct === 'true' ? 'correct' : 'wrong'
+            );
+        });
+
+        if (questions.length > currentQuestionIndex + 1) {
+            nextBtn.classList.remove('hide');
+        } else {
+            localStorage.setItem('lastScore', score);
+            const history = JSON.parse(localStorage.getItem('history')) || [];
+            history.push({ date: new Date().toLocaleDateString(), score });
+            localStorage.setItem('history', JSON.stringify(history));
+            setTimeout(() => {
+                window.location.href = 'results.html';
+            }, 1000);
+        }
+    }
+    nextBtn?.addEventListener('click', () => {
+        currentQuestionIndex++;
+        prepareNextQuestion();
     });
 
-    Array.from(answerButtonsElement.children).forEach(button => {
-        setStatusClass(button);
+    goHomeBtn?.addEventListener('click', () => {
+        window.location.href = 'home.html';
     });
 
-    if (questionList.length > currentQuestionIndex + 1) {
-        nextButton.classList.remove('hide');
-    } else {
-        startButton.innerText = 'Restart';
-        startButton.classList.remove('hide');
-        localStorage.setItem('quizResults', JSON.stringify(quizResults));
-        console.log('Resultados:', quizResults);
+    // Iniciar automáticamente el quiz al cargar la página
+    initializeQuiz();
+}
+
+if (currentPage.includes('results.html')) {
+    const scoreSpan = document.getElementById('score');
+    const score = localStorage.getItem('lastScore') || 0;
+    if (scoreSpan) {
+        scoreSpan.innerText = score;
     }
-}
 
-function resetState() {
-    nextButton.classList.add('hide');
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild);
+    const goHomeBtn = document.getElementById('go-home');
+    if (goHomeBtn) {
+        goHomeBtn.addEventListener('click', () => {
+            window.location.href = 'home.html';
+        });
     }
-}
-
-function shuffleArray(array) {
-    return array.sort(() => Math.random() - 0.5);
-}
-
-function decodeHTML(html) {
-    const txt = document.createElement('textarea');
-    txt.innerHTML = html;
-    return txt.value;
 }

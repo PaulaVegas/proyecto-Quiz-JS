@@ -1,50 +1,40 @@
-<!--<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Results</title>
-        <link rel="stylesheet" href="style.css" />
+        <title>Resultados del Quiz</title>
+        <link rel="stylesheet" href="./style.css" />
     </head>
     <body>
-        <h2>Página para mostrar resultado del quiz</h2>
         <nav>
-            <a href="home.html">Home</a>
-            <a href="question.html">Questions</a>
-            <a href="results.html">Results</a>
+            <ul class="nav">
+                <li>
+                    <a href="home.html" id="nav-home" class="nav-btn">Home</a>
+                </li>
+                <li>
+                    <a href="question.html" id="nav-quiz" class="nav-btn"
+                        >Quiz</a
+                    >
+                </li>
+            </ul>
         </nav>
-        <div id="resultsContainer" class="hide">
-            <h3>Your Results:</h3>
-            <ul id="resultsList"></ul>
-        </div>
+        <header>
+            <h1>Resultado Final</h1>
+        </header>
 
-        <script src="main.js" defer></script>
+        <main>
+            <section id="results">
+                <h2>¡Has terminado el quiz!</h2>
+                <p>Tu puntuación es: <span id="score">0</span>/10</p>
+                <button id="go-home" class="btn">Volver al inicio</button>
+            </section>
+        </main>
+
+        <footer>
+            <h3>Gracias por jugar 😊</h3>
+            <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
+        </footer>
+        <script type="module" src="./js/main.js"></script>
     </body>
-</html>-->
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Resultados del Quiz</title>
-  <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
-  <header>
-    <h1>Resultado Final</h1>
-  </header>
-
-  <main>
-    <p id="score-text">Tu puntuación es: <span id="score"></span>/10</p>
-    <button id="go-home">Volver a la Home</button>
-  </main>
-
-  <footer>
-    <p>Gracias por jugar 😊</p>
-  </footer>
-
-  <script type="module" src="./js/results.js"></script>
-</body>
 </html>
-

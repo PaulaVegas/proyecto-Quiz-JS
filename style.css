@@ -5,39 +5,45 @@
     box-sizing: border-box;
   }
 
+  /* Estilos de la barra de navegación */
   nav {
     background-color: #333;
-    padding: 10px;
+    padding: 40px;
   }
   
   .nav {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    gap: 60px;
+    
   }
   
   .nav li {
     display: inline;
+    font-size: 1.2rem;
   }
   
-  .nav button {
+  /*Estilos de los enlaces de navegación*/
+  .nav-btn {
     background-color: transparent;
     border: none;
     color: white;
-    font-size: 1rem;
     cursor: pointer;
     transition: color 0.3s;
+    text-decoration: none;
+    padding: 10px;
   }
   
-  .nav button:hover {
+  .nav-btn:hover {
     color: #00acee;
   }
   
-  
+
   body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f0eded;
     color: #333;
     padding: 20px;
     line-height: 1.6;
@@ -50,20 +56,33 @@
     padding: 20px;
   }
   
-  header h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+h1 {
+    font-size: 2.2rem;
+    margin: 10px;
     text-align: center;
   }
   
+p {
+    font-size: 0.8rem;
+    margin: 20px;
+    text-align: left;
+  }
+
   footer {
-    margin-top: 40px;
+    margin-top: 50px;
     text-align: center;
-    font-size: 0.9rem;
     color: #888;
   }
 
-  button {
+  .home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+  }
+
+  .btn {
     padding: 10px 20px;
     margin: 10px 5px;
     font-size: 1rem;
@@ -73,9 +92,13 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 180px;
   }
   
-  button:hover {
+  .btn:hover {
     background-color: #2980b9;
   }
   
@@ -85,15 +108,7 @@
     gap: 10px;
     margin-top: 20px;
   }
-  
-  .btn {
-    background-color: #ecf0f1;
-    color: #2c3e50;
-  }
-  
-  .btn:hover {
-    background-color: #d0e1f9;
-  }
+
   
   /* Correcta / Incorrecta */
   .correct {
