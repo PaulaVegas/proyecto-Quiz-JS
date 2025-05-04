@@ -1,144 +1,260 @@
-/* Reset básico */
+/* =========================
+   Variables de diseño
+========================= */
+:root {
+  --primary-color: #3498db;
+  --primary-hover: #2980b9;
+  --correct-color: #2ecc71;
+  --wrong-color: #e74c3c;
+  --text-color: #333;
+  --bg-color: #f0eded;
+  --nav-color: #333;
+  --nav-hover: #00acee;
+}
+
+/* =========================
+   Reset básico
+========================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  /* Estilos de la barra de navegación */
-  nav {
-    background-color: #333;
-    padding: 40px;
-  }
-  
-  .nav {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 60px;
-    
-  }
-  
-  .nav li {
-    display: inline;
-    font-size: 1.2rem;
-  }
-  
-  /*Estilos de los enlaces de navegación*/
-  .nav-btn {
-    background-color: transparent;
-    border: none;
-    color: white;
-    cursor: pointer;
-    transition: color 0.3s;
-    text-decoration: none;
-    padding: 10px;
-  }
-  
-  .nav-btn:hover {
-    color: #00acee;
-  }
-  
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 20px;
+  line-height: 1.6;
+}
 
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f0eded;
-    color: #333;
-    padding: 20px;
-    line-height: 1.6;
-  }
-  
-  /* Estructura principal */
-  header, main, footer {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-  }
-  
+/* =========================
+   Navegación
+========================= */
+nav {
+  background-color: var(--nav-color);
+  padding: 40px;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.nav li {
+  font-size: 1.2rem;
+}
+
+.nav-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.nav-btn:hover,
+.nav-btn:focus {
+  color: var(--nav-hover);
+  outline: none;
+}
+
+/* =========================
+   Contenedores generales
+========================= */
+header, main, footer {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
 h1 {
-    font-size: 2.2rem;
-    margin: 10px;
-    text-align: center;
-  }
-  
+  font-size: 2.2rem;
+  margin: 10px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
 p {
-    font-size: 0.8rem;
-    margin: 20px;
-    text-align: left;
-  }
+  font-size: 1rem;
+  margin: 20px;
+}
 
-  footer {
-    margin-top: 50px;
-    text-align: center;
-    color: #888;
-  }
+/* =========================
+   Botones generales
+========================= */
+.btn {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 180px;
+}
 
-  .home-content {
-    display: flex;
+.btn:hover,
+.btn:focus {
+  background-color: var(--primary-hover);
+  outline: none;
+}
+
+.btn-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* =========================
+   Estados de respuesta
+========================= */
+.correct {
+  background-color: var(--correct-color) !important;
+  color: white;
+}
+
+.wrong {
+  background-color: var(--wrong-color) !important;
+  color: white;
+}
+
+/* =========================
+   Animación de entrada
+========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#quiz {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* =========================
+   Gráfico / canvas
+========================= */
+canvas {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+/* =========================
+   Home layout
+========================= */
+.home-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.home-header h1,
+.home-header p,
+.home-header h3 {
+  margin: 10px 0;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+/* =========================
+   Botones API y Local
+========================= */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.btn-api {
+  background-color: #e67e22; /* Naranja */
+}
+
+.btn-api:hover {
+  background-color: #ca6f1e;
+}
+
+.btn-local {
+  background-color: #9b59b6; /* Púrpura */
+}
+
+.btn-local:hover {
+  background-color: #884ea0;
+}
+
+/* =========================
+   Footer
+========================= */
+footer {
+  margin-top: 50px;
+  text-align: center;
+  color: #888;
+}
+
+/* =========================
+   Clases utilitarias
+========================= */
+.hide {
+  display: none;
+}
+
+/* =========================
+   Responsive (Mobile first)
+========================= */
+@media (max-width: 768px) {
+  .nav {
     flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
     gap: 20px;
   }
 
   .btn {
-    padding: 10px 20px;
-    margin: 10px 5px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  h1, h2, p {
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    width: 180px;
-  }
-  
-  .btn:hover {
-    background-color: #2980b9;
-  }
-  
-  .btn-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
   }
 
-  
-  /* Correcta / Incorrecta */
-  .correct {
-    background-color: #2ecc71 !important;
-    color: white;
+  canvas {
+    width: 100% !important;
+    height: auto !important;
   }
-  
-  .wrong {
-    background-color: #e74c3c !important;
-    color: white;
-  }
+}
 
-
-  @media (max-width: 600px) {
-    button {
-      width: 100%;
-      font-size: 1rem;
-    }
-  
-    .btn-grid {
-      width: 100%;
-    }
-  
-    canvas {
-      width: 100% !important;
-      height: auto !important;
-    }
-  }
-  
-  .hide {
-    display: none;
-  }
-  

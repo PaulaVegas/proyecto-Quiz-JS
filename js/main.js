@@ -1,5 +1,5 @@
 //Enganchamos la función getQuestionsFromAPI en el main.js
-import { getQuestionsFromAPI } from './data.js';
+import { getQuestionsFromAPI, getQuestionsLocal } from './data.js';
 
 //Testing log
 // console.log('main.js enganchado, menos mal');
@@ -58,13 +58,24 @@ if (
         ctx.stroke();
     }
 
-    // Botón de inicio
-    const startBtn = document.getElementById('start-btn');
-    if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            window.location.href = 'question.html'; // Cambia a la página de preguntas
-        });
+    // Botones para elegir fuente de preguntas
+    const btnAPI = document.getElementById('btn-api');
+    const btnLocal = document.getElementById('btn-local');
+
+    if (btnAPI) {
+        btnAPI.addEventListener('click', () => {
+        localStorage.setItem('questionSource', 'api'); // Guardamos el tipo de fuente
+        window.location.href = 'question.html';
+         });
     }
+
+    if (btnLocal) {
+        btnLocal.addEventListener('click', () => {
+            localStorage.setItem('questionSource', 'local'); // Guardamos el tipo de fuente
+            window.location.href = 'question.html';
+    });
+   }
+
 }
 // Si estamos en question.html, inicializar el quiz
 if (currentPage.includes('question.html')) {
@@ -97,7 +108,16 @@ if (currentPage.includes('question.html')) {
         showView(quizView);
         currentQuestionIndex = 0;
         score = 0;
-        questions = await getQuestionsFromAPI();
+        //questions = await getQuestionsFromAPI();
+
+        const source = localStorage.getItem('questionSource');
+
+  if (source === 'local') {
+    const { getQuestionsLocal } = await import('./data.js');
+    questions = getQuestionsLocal();
+} else {
+    questions = await getQuestionsFromAPI();
+}
 
         if (questions.length === 0) {
             alert('No se pudieron cargar preguntas.');
