@@ -57,8 +57,6 @@
 
 -   Mostrar en la Home con una gráfica los resultados de las últimas partidas jugadas (leer puntuaciones de LocalStorage). Representar Fecha(eje X) vs Puntuación(eje Y)
 
-![Logo](./assets/ranking.jpeg)
-
 ### Páginas
 
 -   `home.html`. Página de bienvenida + gráfica de últimos resultados
@@ -79,9 +77,7 @@
 
 #### The-Trivia-API
 
-```https://the-trivia-api.com
-
-```
+https://the-trivia-api.com
 
 ### Preguntas propias
 
