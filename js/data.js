@@ -118,3 +118,17 @@ export function getQuestionsLocal() {
         },
     ];
 }
+
+//Función para mezclar las preguntas locales con las de la API
+export async function getMixedQuestions() {
+    const localQuestions = getQuestionsLocal();
+    const apiQuestions = await getQuestionsFromAPI();
+
+    // Mezclar las preguntas locales y de la API
+    const allQuestions = [...localQuestions, ...apiQuestions];
+    // return allQuestions.sort(() => Math.random() - 0.5); // Mezclar el array
+    const shuffled = allQuestions.sort(() => Math.random() - 0.5);
+
+    // Devolver solo 10 preguntas
+    return shuffled.slice(0, 10);
+}

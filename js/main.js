@@ -53,70 +53,32 @@ if (
             },
         });
     }
-
-    //Dibujar el gráfico de historial
-    // const canvas = document.getElementById('historyChart');
-    // if (canvas) {
-    //     const ctx = canvas.getContext('2d');
-    //     const history = JSON.parse(localStorage.getItem('history')) || [];
-
-    //     // Limpiar canvas
-    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    //     // Parámetros del gráfico
-    //     const padding = 30;
-    //     const barWidth = 30;
-    //     const maxScore = 10;
-    //     const spacing = 10;
-    //     const chartHeight = canvas.height - padding * 2;
-
-    //     // Calcular escala
-    //     const maxBars = history.length;
-    //     const totalWidth = maxBars * (barWidth + spacing);
-    //     const offsetX = (canvas.width - totalWidth) / 2;
-
-    //     // Dibujar barras
-    //     history.forEach((entry, index) => {
-    //         const x = offsetX + index * (barWidth + spacing);
-    //         const barHeight = (entry.score / maxScore) * chartHeight;
-    //         const y = canvas.height - padding - barHeight;
-
-    //         // Dibujar barra
-    //         ctx.fillStyle = '#4a90e2';
-    //         ctx.fillRect(x, y, barWidth, barHeight);
-
-    //         // Etiqueta de fecha
-    //         ctx.fillStyle = '#000';
-    //         ctx.font = '10px sans-serif';
-    //         ctx.textAlign = 'center';
-    //         ctx.fillText(entry.date, x + barWidth / 2, canvas.height - 10);
-    //     });
-
-    //     // Eje Y
-    //     ctx.beginPath();
-    //     ctx.moveTo(padding, padding);
-    //     ctx.lineTo(padding, canvas.height - padding);
-    //     ctx.stroke();
-    // }
-
-    // Botones para elegir fuente de preguntas
-    const btnAPI = document.getElementById('btn-api');
-    const btnLocal = document.getElementById('btn-local');
-
-    if (btnAPI) {
-        btnAPI.addEventListener('click', () => {
-            localStorage.setItem('questionSource', 'api'); // Guardamos el tipo de fuente
-            window.location.href = 'question.html';
-        });
-    }
-
-    if (btnLocal) {
-        btnLocal.addEventListener('click', () => {
-            localStorage.setItem('questionSource', 'local'); // Guardamos el tipo de fuente
-            window.location.href = 'question.html';
-        });
-    }
 }
+// Botones para elegir fuente de preguntas
+const btnAPI = document.getElementById('btn-api');
+const btnLocal = document.getElementById('btn-local');
+const btnMixed = document.getElementById('btn-mixed');
+
+if (btnAPI) {
+    btnAPI.addEventListener('click', () => {
+        localStorage.setItem('questionSource', 'api'); // Guardamos el tipo de fuente
+        window.location.href = 'question.html';
+    });
+}
+
+if (btnLocal) {
+    btnLocal.addEventListener('click', () => {
+        localStorage.setItem('questionSource', 'local'); // Guardamos el tipo de fuente
+        window.location.href = 'question.html';
+    });
+}
+if (btnMixed) {
+    btnMixed.addEventListener('click', () => {
+        localStorage.setItem('questionSource', 'mixed'); // Guardamos el tipo de fuente
+        window.location.href = 'question.html';
+    });
+}
+
 // Si estamos en question.html, inicializar el quiz
 if (currentPage.includes('question.html')) {
     const homeView = document.getElementById('home');
@@ -155,6 +117,9 @@ if (currentPage.includes('question.html')) {
         if (source === 'local') {
             const { getQuestionsLocal } = await import('./data.js');
             questions = getQuestionsLocal();
+        } else if (source === 'mixed') {
+            const { getMixedQuestions } = await import('./data.js');
+            questions = await getMixedQuestions();
         } else {
             questions = await getQuestionsFromAPI();
         }
