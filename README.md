@@ -4,9 +4,7 @@
 
 ### JS, ES6, Node.js, Frontend, Backend, Express, React, MERN, testing, DevOps
 
-## EJERCICIO: Quiz :octocat: :loudspeaker: :bangbang:
-
-![Logo](./assets/tree.jpg)
+## EJERCICIO: Proyecto conjunto de creación de Quiz :octocat: :loudspeaker: :bangbang:
 
 **Objetivo**
 
@@ -59,8 +57,6 @@
 
 -   Mostrar en la Home con una gráfica los resultados de las últimas partidas jugadas (leer puntuaciones de LocalStorage). Representar Fecha(eje X) vs Puntuación(eje Y)
 
-![Logo](./assets/ranking.jpeg)
-
 ### Páginas
 
 -   `home.html`. Página de bienvenida + gráfica de últimos resultados
@@ -77,37 +73,22 @@
 ![Logo](./assets/quiz.png)
 ![Logo](./assets/results.png)
 
-### A por ello!!!
+## API Reference
 
-![Logo](./assets/quiz-time.jpg)
+#### The-Trivia-API
 
-// Posible reparto de tareas:
-// ELIDA:
+https://the-trivia-api.com
 
-// Estructurar el home.html (botones, contenedores, clases)
+### Preguntas propias
 
-// Encargarse del style.css (bootstrap, estilos propios)
+## Features
 
-//Encargarse del mobile first y responsive
+-   Mobile first, responsive design
+-   Elección de fuente de las preguntas
+-   Elección de dificultad
+-   Facilidad de uso
 
-// Insertar preguntas manuales (questions.js)
+## Authors
 
-// Creación del home.html
-
-// Repartición de funciones.
-
-// PAULA:
-
-// Lógica de la API (fetch, formateo de datos, etc.)
-
-// Creación de question y results.html
-
-// Organización en GITHUB
-
-// AMBAS:
-
-// Revisar el código y la lógica de cada una para que no haya errores.
-// Revisar el CSS y HTML para que no haya conflictos entre ambas (clases, ids, etc.)
-// Refactorizar el código si es necesario.
-// Comentar el código para que sea entendible para ambas.
-// Código limpio y ordenado.
+-   [@Elimila](https://www.github.com/elimila)
+-   [@PaulaVegas](https://www.github.com/PaulaVegas)
