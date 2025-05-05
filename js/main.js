@@ -13,70 +13,95 @@ if (
     currentPage === '/' ||
     currentPage.endsWith('index.html')
 ) {
-    //Dibujar el gráfico de historial
-    const canvas = document.getElementById('historyChart');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        const history = JSON.parse(localStorage.getItem('history')) || [];
-
-        // Limpiar canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Parámetros del gráfico
-        const padding = 30;
-        const barWidth = 30;
-        const maxScore = 10;
-        const spacing = 10;
-        const chartHeight = canvas.height - padding * 2;
-
-        // Calcular escala
-        const maxBars = history.length;
-        const totalWidth = maxBars * (barWidth + spacing);
-        const offsetX = (canvas.width - totalWidth) / 2;
-
-        // Dibujar barras
-        history.forEach((entry, index) => {
-            const x = offsetX + index * (barWidth + spacing);
-            const barHeight = (entry.score / maxScore) * chartHeight;
-            const y = canvas.height - padding - barHeight;
-
-            // Dibujar barra
-            ctx.fillStyle = '#4a90e2';
-            ctx.fillRect(x, y, barWidth, barHeight);
-
-            // Etiqueta de fecha
-            ctx.fillStyle = '#000';
-            ctx.font = '10px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(entry.date, x + barWidth / 2, canvas.height - 10);
-        });
-
-        // Eje Y
-        ctx.beginPath();
-        ctx.moveTo(padding, padding);
-        ctx.lineTo(padding, canvas.height - padding);
-        ctx.stroke();
+    const ctx = document.getElementById('historyChart').getContext('2d');
+    const data = JSON.parse(localStorage.getItem('history')) || [];
+    const fechas = data.map(item => item.date);
+    const puntuaciones = data.map(item => item.score);
+    const colorines = [];
+    for (let i = 0; i < puntuaciones.length; i++) {
+        var color;
+        if (puntuaciones[i] >= 8) {
+            color = ' #C1E1C1';
+        } else if (puntuaciones[i] >= 5) {
+            color = ' #fdfd96';
+        } else {
+            color = ' #FAA0A0';
+        }
+        colorines.push(color);
+    }
+    const colorinesHover = [];
+    for (let i = 0; i < puntuaciones.length; i++) {
+        var colorHover;
+        if (puntuaciones[i] >= 8) {
+            colorHover = '#03c03c';
+        } else if (puntuaciones[i] >= 5) {
+            colorHover = '#C4BB7D';
+        } else {
+            colorHover = ' #c23b22';
+        }
+        colorinesHover.push(colorHover);
+    }
+    if (window.myChart) {
+        window.myChart.destroy();
     }
 
-    // Botones para elegir fuente de preguntas
-    const btnAPI = document.getElementById('btn-api');
-    const btnLocal = document.getElementById('btn-local');
+    if (data.length > 0) {
+        window.myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: fechas,
+                datasets: [
+                    {
+                        label: 'Puntuación',
+                        data: puntuaciones,
+                        barPercentage: 0.5,
+                        barThickness: 80,
+                        maxBarThickness: 80,
+                        minBarLength: 2,
+                        backgroundColor: colorines,
+                        hoverBackgroundColor: colorinesHover,
+                        borderWidth: 1,
+                        borderColor: 'darkblue',
+                        borderRadius: 5,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                    },
+                },
+            },
+        });
+    }
+}
+// Botones para elegir fuente de preguntas
+const btnAPI = document.getElementById('btn-api');
+const btnLocal = document.getElementById('btn-local');
+const btnMixed = document.getElementById('btn-mixed');
 
-    if (btnAPI) {
-        btnAPI.addEventListener('click', () => {
+if (btnAPI) {
+    btnAPI.addEventListener('click', () => {
         localStorage.setItem('questionSource', 'api'); // Guardamos el tipo de fuente
         window.location.href = 'question.html';
-         });
-    }
-
-    if (btnLocal) {
-        btnLocal.addEventListener('click', () => {
-            localStorage.setItem('questionSource', 'local'); // Guardamos el tipo de fuente
-            window.location.href = 'question.html';
     });
-   }
-
 }
+
+if (btnLocal) {
+    btnLocal.addEventListener('click', () => {
+        localStorage.setItem('questionSource', 'local'); // Guardamos el tipo de fuente
+        window.location.href = 'question.html';
+    });
+}
+if (btnMixed) {
+    btnMixed.addEventListener('click', () => {
+        localStorage.setItem('questionSource', 'mixed'); // Guardamos el tipo de fuente
+        window.location.href = 'question.html';
+    });
+}
+
 // Si estamos en question.html, inicializar el quiz
 if (currentPage.includes('question.html')) {
     const homeView = document.getElementById('home');
@@ -112,12 +137,15 @@ if (currentPage.includes('question.html')) {
 
         const source = localStorage.getItem('questionSource');
 
-  if (source === 'local') {
-    const { getQuestionsLocal } = await import('./data.js');
-    questions = getQuestionsLocal();
-} else {
-    questions = await getQuestionsFromAPI();
-}
+        if (source === 'local') {
+            const { getQuestionsLocal } = await import('./data.js');
+            questions = getQuestionsLocal();
+        } else if (source === 'mixed') {
+            const { getMixedQuestions } = await import('./data.js');
+            questions = await getMixedQuestions();
+        } else {
+            questions = await getQuestionsFromAPI();
+        }
 
         if (questions.length === 0) {
             alert('No se pudieron cargar preguntas.');

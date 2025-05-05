@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz SPA</title>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <nav>
-      <ul class="nav">
-        <li>
-          <a href="question.html" id="nav-quiz" class="nav-btn">Quiz</a>
-        </li>
-        <li>
-          <a href="results.html" id="nav-results" class="nav-btn">Resultados</a>
-        </li>
-      </ul>
-    </nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quiz SPA</title>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <nav>
+            <ul class="nav">
+                <li>
+                    <a href="question.html" id="nav-quiz" class="nav-btn"
+                        >Quiz</a
+                    >
+                </li>
+                <li>
+                    <a href="results.html" id="nav-results" class="nav-btn"
+                        >Resultados</a
+                    >
+                </li>
+            </ul>
+        </nav>
 
-    <!-- VISTA 1: Home -->
-    <section id="home">
-     
-      <div class="home-header">
-        <h1>¡Bienvenida al Quiz!</h1>
-        <p>¿Estás lista para jugar?</p>
-        <h3>Últimos resultados</h3>
-      </div>
+        <!-- VISTA 1: Home -->
+        <section id="home">
+            <div class="home-header">
+                <h1>¡Bienvenida al Quiz!</h1>
+                <p>¿Estás lista para jugar?</p>
+                <h3>Últimos resultados</h3>
+            </div>
 
-      
-      <div class="home-content">
-        <canvas id="historyChart" width="300" height="200"></canvas>
+            <div class="home-content">
+                <canvas id="historyChart" width="300" height="200"></canvas>
 
-      
-        <div class="btn-group">
-          <button id="btn-api" class="btn btn-api">Jugar con preguntas de API</button>
-          <button id="btn-local" class="btn btn-local">Jugar con preguntas locales</button>
-        </div>
-      </div>
-    </section>
+                <div class="btn-group">
+                    <button id="btn-api" class="btn btn-api">
+                        Jugar con preguntas de API
+                    </button>
+                    <button id="btn-local" class="btn btn-local">
+                        Jugar con preguntas locales
+                    </button>
+                    <button id="btn-mixed" class="btn btn-mixed">
+                        Sorpréndeme!
+                    </button>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-      <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
-    </footer>
+        <footer>
+            <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
+        </footer>
 
-    <script type="module" src="./js/main.js"></script>
-  </body>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+        <script type="module" src="./js/main.js"></script>
+    </body>
 </html>
