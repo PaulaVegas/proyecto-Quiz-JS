@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Quiz Preguntas</title>
-        <link rel="stylesheet" href="./style.css" />
-    </head>
-    <body>
-        <nav>
-            <ul class="nav">
-                <li>
-                    <a href="home.html" id="nav-home" class="nav-btn">Home</a>
-                </li>
-                <li>
-                    <a href="results.html" id="nav-results" class="nav-btn"
-                        >Resultados</a
-                    >
-                </li>
-            </ul>
-        </nav>
-        <header>
-            <h1>Preguntas del Quiz</h1>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz - Preguntas</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="question-body">
+  
+    <nav>
+      <ul class="nav">
+        <li>
+          <a href="home.html" id="nav-home" class="nav-btn">Home</a>
+        </li>
+        <li>
+          <a href="results.html" id="nav-results" class="nav-btn">Resultados</a>
+        </li>
+      </ul>
+    </nav>
 
-        <main>
-            <section id="quiz" class="view">
-                <h2 id="question-number">
-                    Pregunta <span id="current-question">1</span> de 10
-                </h2>
-                <div id="question-container">
-                    <div id="question">Aquí va la pregunta</div>
-                    <div id="answer-buttons" class="btn-grid"></div>
-                </div>
-                <button id="next-btn" class="btn next-btn hide">Siguiente</button>
+    
+    <section id="quiz-container">
+      <div class="quiz-card">
+        <h2 class="quiz-title">¡Preguntas del Quiz!</h2>
+        <h3 id="question-number">
+           <span id="current-question">1</span> / 10
+        </h3>
+        <div id="question-container">
+          <div id="question" class="quiz-question">Aquí va la pregunta</div>
+          <div id="answer-buttons" class="btn-grid"></div>
+        </div>
+        <button id="next-btn" class="btn next-btn hide">Siguiente</button>
+      </div>
+    </section>
 
-            </section>
-        </main>
-        <footer>
-            <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
-        </footer>
+    <footer>
+      <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
+    </footer>
 
-        <script type="module" src="./js/main.js"></script>
-    </body>
+    <script type="module" src="./js/main.js"></script>
+  </body>
 </html>
+

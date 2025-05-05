@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Resultados del Quiz</title>
-        <link rel="stylesheet" href="./style.css" />
-    </head>
-    <body>
-        <nav>
-            <ul class="nav">
-                <li>
-                    <a href="home.html" id="nav-home" class="nav-btn">Home</a>
-                </li>
-                <li>
-                    <a href="question.html" id="nav-quiz" class="nav-btn"
-                        >Quiz</a
-                    >
-                </li>
-            </ul>
-        </nav>
-        <header>
-            <h1>Resultado Final</h1>
-        </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultados</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="results-body">
+  <nav>
+    <ul class="nav">
+      <li><a href="home.html" class="nav-btn">Home</a></li>
+      <li><a href="question.html" class="nav-btn">Resultados</a></li>
+    </ul>
+  </nav>
 
-        <main>
-            <section id="results">
-                <h2>¡Has terminado el quiz!</h2>
-                <p>Tu puntuación es: <span id="score">0</span>/10</p>
-                <button id="go-home" class="btn">Volver al inicio</button>
-            </section>
-        </main>
+  <main class="results-container">
+    <div class="results-card">
+      <div class="score-circle">
+        <span id="score">10</span>
+        <p>/10</p>
+      </div>
+      <div class="results-info">
+        <h2>Resultados Final</h2>
+        <p>¡Has terminado el quiz!<br /></p>
+        <a href="home.html" class="btn btn-retry">Jugar otra vez</a>
+      </div>
+    </div>
+  </main>
 
-        <footer>
-            <h3>Gracias por jugar 😊</h3>
-            <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
-        </footer>
-        <script type="module" src="./js/main.js"></script>
-    </body>
+  <footer>
+    <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
+  </footer>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
 </html>
+

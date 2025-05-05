@@ -119,31 +119,22 @@ p {
 /* =========================
    Botón Siguiente personalizado
 ========================= */
-
 .next-btn {
   font-size: 1rem;
-  padding: 8px 16px;
+  padding: 12px 24px;
   width: 140px;
   background-color: #2c2c2c;
   color: #ffffff;
   border-radius: 6px;
   text-align: center;
+  margin: auto;
+  display: block;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   transition: background-color 0.3s ease;
 }
 
 .next-btn:hover {
   background-color: #444;
-}
-
-
-.btn-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 5px;
 }
 
 /* =========================
@@ -278,5 +269,221 @@ footer {
     height: auto !important;
   }
 }
+
+/* =========================
+   Diseño tipo tarjeta para preguntas
+========================= */
+.question-body {
+  background-color: #d5ecf9;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#quiz-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 20px;
+}
+
+.quiz-card {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  width: 700px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.quiz-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#question-number {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.quiz-question {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+/* =========================
+   Botones de respuesta en 2 columnas
+========================= */
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.btn-grid .btn {
+  width: 100%;
+  padding: 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* Colores personalizados */
+.btn-grid .btn:nth-child(1) {
+  background-color: #917aed;
+  color: #222;
+}
+
+.btn-grid .btn:nth-child(2) {
+  background-color: #f1c40f;
+  color: #222;
+}
+
+.btn-grid .btn:nth-child(3) {
+  background-color: #c9cc2e;
+  color: #222;
+}
+
+.btn-grid .btn:nth-child(4) {
+  background-color: #48c9b0;
+  color: #222;
+}
+
+/* =========================
+   Responsive: 1 columna en móvil
+========================= */
+@media (max-width: 600px) {
+  .quiz-card {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .btn-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    font-size: 1.1rem;
+  }
+}
+
+/* =========================
+   Estilo de resultados (results.html)
+========================= */
+.results-body {
+  background-color: #d5ecf9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.results-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  flex: 1;
+}
+
+.results-card {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  gap: 40px;
+  max-width: 800px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.score-circle {
+  background-color: #bfffe0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #111;
+}
+
+.score-circle small {
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+
+.results-info {
+  text-align: center;
+  max-width: 350px;
+}
+
+.results-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.results-info p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Botón jugar otra vez */
+.btn-retry {
+  background-color: #0077c8;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-retry:hover {
+  background-color: #005fa3;
+}
+
+/* =========================
+   Responsive resultados
+========================= */
+@media (max-width: 600px) {
+  .results-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    font-size: 2.2rem;
+  }
+
+  }
+
+  .results-info h2 {
+    font-size: 1.2rem;
+  }
+
+  .btn-retry {
+    width: 100%;
+  }
+}
+
 
 
