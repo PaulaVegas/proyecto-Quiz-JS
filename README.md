@@ -4,9 +4,7 @@
 
 ### JS, ES6, Node.js, Frontend, Backend, Express, React, MERN, testing, DevOps
 
-## EJERCICIO: Quiz :octocat: :loudspeaker: :bangbang:
-
-![Logo](./assets/tree.jpg)
+## EJERCICIO: Proyecto conjunto de creación de Quiz :octocat: :loudspeaker: :bangbang:
 
 **Objetivo**
 
@@ -77,37 +75,24 @@
 ![Logo](./assets/quiz.png)
 ![Logo](./assets/results.png)
 
-### A por ello!!!
+## API Reference
 
-![Logo](./assets/quiz-time.jpg)
+#### The-Trivia-API
 
-// Posible reparto de tareas:
-// ELIDA:
+```https://the-trivia-api.com
 
-// Estructurar el home.html (botones, contenedores, clases)
+```
 
-// Encargarse del style.css (bootstrap, estilos propios)
+### Preguntas propias
 
-//Encargarse del mobile first y responsive
+## Features
 
-// Insertar preguntas manuales (questions.js)
+-   Mobile first, responsive design
+-   Elección de fuente de las preguntas
+-   Elección de dificultad
+-   Facilidad de uso
 
-// Creación del home.html
+## Authors
 
-// Repartición de funciones.
-
-// PAULA:
-
-// Lógica de la API (fetch, formateo de datos, etc.)
-
-// Creación de question y results.html
-
-// Organización en GITHUB
-
-// AMBAS:
-
-// Revisar el código y la lógica de cada una para que no haya errores.
-// Revisar el CSS y HTML para que no haya conflictos entre ambas (clases, ids, etc.)
-// Refactorizar el código si es necesario.
-// Comentar el código para que sea entendible para ambas.
-// Código limpio y ordenado.
+-   [@Elimila](https://www.github.com/elimila)
+-   [@PaulaVegas](https://www.github.com/PaulaVegas)
