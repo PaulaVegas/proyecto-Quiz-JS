@@ -17,7 +17,30 @@ if (
     const data = JSON.parse(localStorage.getItem('history')) || [];
     const fechas = data.map(item => item.date);
     const puntuaciones = data.map(item => item.score);
-
+    const colorines = [];
+    for (let i = 0; i < puntuaciones.length; i++) {
+        var color;
+        if (puntuaciones[i] >= 8) {
+            color = ' #C1E1C1';
+        } else if (puntuaciones[i] >= 5) {
+            color = ' #fdfd96';
+        } else {
+            color = ' #FAA0A0';
+        }
+        colorines.push(color);
+    }
+    const colorinesHover = [];
+    for (let i = 0; i < puntuaciones.length; i++) {
+        var colorHover;
+        if (puntuaciones[i] >= 8) {
+            colorHover = '#03c03c';
+        } else if (puntuaciones[i] >= 5) {
+            colorHover = '#C4BB7D';
+        } else {
+            colorHover = ' #c23b22';
+        }
+        colorinesHover.push(colorHover);
+    }
     if (window.myChart) {
         window.myChart.destroy();
     }
@@ -35,8 +58,8 @@ if (
                         barThickness: 80,
                         maxBarThickness: 80,
                         minBarLength: 2,
-                        backgroundColor: '#3498db',
-                        hoverBackgroundColor: '#2980b9',
+                        backgroundColor: colorines,
+                        hoverBackgroundColor: colorinesHover,
                         borderWidth: 1,
                         borderColor: 'darkblue',
                         borderRadius: 5,
