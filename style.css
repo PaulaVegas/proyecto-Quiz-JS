@@ -483,7 +483,68 @@ footer {
   .btn-retry {
     width: 100%;
   }
+
+  /* =========================
+   Home rediseñado estilo tarjeta doble
+========================= */
+.home-main {
+  background-color: #d5ecf9;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
 }
+
+/* Estilo general de las tarjetas */
+.card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.welcome-card h2,
+.chart-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+/* Botón "Take the Quiz" */
+.btn-start {
+  background-color: #0077c8;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-start:hover {
+  background-color: #005fa3;
+}
+
+/* =========================
+   Responsive para Home
+========================= */
+@media (max-width: 768px) {
+  .home-main {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .card {
+    width: 90%;
+  }
+}
+
+
 
 
 
