@@ -13,50 +13,91 @@ if (
     currentPage === '/' ||
     currentPage.endsWith('index.html')
 ) {
-    //Dibujar el gráfico de historial
-    const canvas = document.getElementById('historyChart');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        const history = JSON.parse(localStorage.getItem('history')) || [];
+    const ctx = document.getElementById('historyChart').getContext('2d');
+    const data = JSON.parse(localStorage.getItem('history')) || [];
+    const fechas = data.map(item => item.date);
+    const puntuaciones = data.map(item => item.score);
 
-        // Limpiar canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Parámetros del gráfico
-        const padding = 30;
-        const barWidth = 30;
-        const maxScore = 10;
-        const spacing = 10;
-        const chartHeight = canvas.height - padding * 2;
-
-        // Calcular escala
-        const maxBars = history.length;
-        const totalWidth = maxBars * (barWidth + spacing);
-        const offsetX = (canvas.width - totalWidth) / 2;
-
-        // Dibujar barras
-        history.forEach((entry, index) => {
-            const x = offsetX + index * (barWidth + spacing);
-            const barHeight = (entry.score / maxScore) * chartHeight;
-            const y = canvas.height - padding - barHeight;
-
-            // Dibujar barra
-            ctx.fillStyle = '#4a90e2';
-            ctx.fillRect(x, y, barWidth, barHeight);
-
-            // Etiqueta de fecha
-            ctx.fillStyle = '#000';
-            ctx.font = '10px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(entry.date, x + barWidth / 2, canvas.height - 10);
-        });
-
-        // Eje Y
-        ctx.beginPath();
-        ctx.moveTo(padding, padding);
-        ctx.lineTo(padding, canvas.height - padding);
-        ctx.stroke();
+    if (window.myChart) {
+        window.myChart.destroy();
     }
+
+    if (data.length > 0) {
+        window.myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: fechas,
+                datasets: [
+                    {
+                        label: 'Puntuación',
+                        data: puntuaciones,
+                        barPercentage: 0.5,
+                        barThickness: 80,
+                        maxBarThickness: 80,
+                        minBarLength: 2,
+                        backgroundColor: '#3498db',
+                        hoverBackgroundColor: '#2980b9',
+                        borderWidth: 1,
+                        borderColor: 'darkblue',
+                        borderRadius: 5,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                    },
+                },
+            },
+        });
+    }
+
+    //Dibujar el gráfico de historial
+    // const canvas = document.getElementById('historyChart');
+    // if (canvas) {
+    //     const ctx = canvas.getContext('2d');
+    //     const history = JSON.parse(localStorage.getItem('history')) || [];
+
+    //     // Limpiar canvas
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //     // Parámetros del gráfico
+    //     const padding = 30;
+    //     const barWidth = 30;
+    //     const maxScore = 10;
+    //     const spacing = 10;
+    //     const chartHeight = canvas.height - padding * 2;
+
+    //     // Calcular escala
+    //     const maxBars = history.length;
+    //     const totalWidth = maxBars * (barWidth + spacing);
+    //     const offsetX = (canvas.width - totalWidth) / 2;
+
+    //     // Dibujar barras
+    //     history.forEach((entry, index) => {
+    //         const x = offsetX + index * (barWidth + spacing);
+    //         const barHeight = (entry.score / maxScore) * chartHeight;
+    //         const y = canvas.height - padding - barHeight;
+
+    //         // Dibujar barra
+    //         ctx.fillStyle = '#4a90e2';
+    //         ctx.fillRect(x, y, barWidth, barHeight);
+
+    //         // Etiqueta de fecha
+    //         ctx.fillStyle = '#000';
+    //         ctx.font = '10px sans-serif';
+    //         ctx.textAlign = 'center';
+    //         ctx.fillText(entry.date, x + barWidth / 2, canvas.height - 10);
+    //     });
+
+    //     // Eje Y
+    //     ctx.beginPath();
+    //     ctx.moveTo(padding, padding);
+    //     ctx.lineTo(padding, canvas.height - padding);
+    //     ctx.stroke();
+    // }
 
     // Botones para elegir fuente de preguntas
     const btnAPI = document.getElementById('btn-api');
@@ -64,18 +105,17 @@ if (
 
     if (btnAPI) {
         btnAPI.addEventListener('click', () => {
-        localStorage.setItem('questionSource', 'api'); // Guardamos el tipo de fuente
-        window.location.href = 'question.html';
-         });
+            localStorage.setItem('questionSource', 'api'); // Guardamos el tipo de fuente
+            window.location.href = 'question.html';
+        });
     }
 
     if (btnLocal) {
         btnLocal.addEventListener('click', () => {
             localStorage.setItem('questionSource', 'local'); // Guardamos el tipo de fuente
             window.location.href = 'question.html';
-    });
-   }
-
+        });
+    }
 }
 // Si estamos en question.html, inicializar el quiz
 if (currentPage.includes('question.html')) {
@@ -112,12 +152,12 @@ if (currentPage.includes('question.html')) {
 
         const source = localStorage.getItem('questionSource');
 
-  if (source === 'local') {
-    const { getQuestionsLocal } = await import('./data.js');
-    questions = getQuestionsLocal();
-} else {
-    questions = await getQuestionsFromAPI();
-}
+        if (source === 'local') {
+            const { getQuestionsLocal } = await import('./data.js');
+            questions = getQuestionsLocal();
+        } else {
+            questions = await getQuestionsFromAPI();
+        }
 
         if (questions.length === 0) {
             alert('No se pudieron cargar preguntas.');
