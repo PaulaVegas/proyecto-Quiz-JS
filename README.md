@@ -64,6 +64,12 @@ https://the-trivia-api.com
 
 ---
 
+## 📌 Ejemplo de uso
+
+![App Screenshot](./assets/home.png)
+![App Screenshot](./assets/quiz-time.png)
+![App Screenshot](./assets/result.png)
+
 ## 🧑‍💻 Créditos
 
 Desarrollado por **Paula & Elida** como parte del proyecto de aprendizaje en desarrollo web 🥳
