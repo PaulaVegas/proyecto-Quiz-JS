@@ -128,6 +128,7 @@ if (currentPage.includes('question.html')) {
     const quizView = document.getElementById('quiz');
     const resultsView = document.getElementById('results');
     let quizFinished = false;
+    let answered = false;
 
     const startBtn = document.getElementById('start-btn');
     const nextBtn = document.getElementById('next-btn');
@@ -205,7 +206,8 @@ if (currentPage.includes('question.html')) {
     }
 
     function selectAnswer(e) {
-        if (quizFinished) return; // prevent duplicate handling
+        if (quizFinished || answered) return; // prevent duplicate handling
+        answered = true; // prevent re-entry
 
         const selected = e.target;
         const correct = selected.dataset.correct === 'true';
@@ -241,7 +243,12 @@ if (currentPage.includes('question.html')) {
     }
 
     nextBtn?.addEventListener('click', () => {
+        if (!answered) {
+            alert('Por favor, selecciona una respuesta antes de continuar.');
+            return;
+        }
         currentQuestionIndex++;
+        answered = false; // reset for next question
         prepareNextQuestion();
     });
 
