@@ -53,7 +53,7 @@ p {
    Clases utilitarias
 ========================= */
 .hide {
-  display: none;
+  display: none !important;
 }
 
 /* =========================
