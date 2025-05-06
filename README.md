@@ -6,8 +6,8 @@ Este proyecto es una **Single Page Application (SPA)** que permite a los usuario
 
 ## 📁 Estructura del Proyecto
 
-
-📦proyecto-Quiz-JS/
+```
+📦 proyecto-Quiz-JS/
 │
 ├── assets/                          # Archivos multimedia del proyecto
 │   ├── home.png                     # Captura de la vista Home
@@ -36,18 +36,6 @@ Este proyecto es una **Single Page Application (SPA)** que permite a los usuario
 │
 ├── README.md                        # Documentación del proyecto y cómo ejecutarlo
 └── .prettierrc                      # Configuración de formato de código (opcional)
-
-
-## 🚀 Funcionalidades principales
-
--   Selección de tipo de preguntas: **API, Local o Mixto**
--   Selección de dificultad: Fácil, medio o difícil.
--   Componente dinámico de preguntas y respuestas
--   Registro de puntajes en **localStorage**
--   Visualización de resultados con **Chart.js**
--   Responsive para uso en móviles y tablets
-
----
 
 ## 🧩 Tecnologías usadas
 
