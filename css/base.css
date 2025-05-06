@@ -19,13 +19,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Orbitron','Segoe UI', sans-serif;
 }
 
 /* =========================
    Estilos globales
 ========================= */
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Orbitron','Segoe UI', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   padding: 20px;

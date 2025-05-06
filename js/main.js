@@ -65,11 +65,11 @@ if (
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Historial de puntuaciones'
+                        text: 'Historial de puntuaciones',
                     },
                     legend: {
-                        display: false
-                    }
+                        display: false,
+                    },
                 },
                 scales: {
                     y: {
@@ -77,28 +77,44 @@ if (
                         max: 10,
                         title: {
                             display: true,
-                            text: 'Puntaje'
-                        }
+                            text: 'Puntaje',
+                        },
                     },
                     x: {
                         title: {
                             display: true,
-                            text: 'Fecha'
-                        }
-                    }
+                            text: 'Fecha',
+                        },
+                    },
                 },
             },
         });
     }
 }
 
+const startBtn = document.getElementById('startBtn');
+const difficultySelect = document.getElementById('difficulty');
+
+//Para elegir la dificultad
+if (difficultySelect && startBtn) {
+    difficultySelect.addEventListener('change', () => {
+        const selectedDifficulty = difficultySelect.value;
+        localStorage.setItem('difficulty', selectedDifficulty);
+    });
+
+    startBtn.addEventListener('click', () => {
+        const selectedDifficulty = difficultySelect.value;
+        localStorage.setItem('difficulty', selectedDifficulty);
+        window.location.href = 'question.html';
+    });
+}
+
 // Botones para elegir fuente de preguntas
-const btnAPI = document.getElementById('btn-api');
 const btnLocal = document.getElementById('btn-local');
 const btnMixed = document.getElementById('btn-mixed');
 
-if (btnAPI) {
-    btnAPI.addEventListener('click', () => {
+if (startBtn) {
+    startBtn.addEventListener('click', () => {
         localStorage.setItem('questionSource', 'api');
         window.location.href = 'question.html';
     });
@@ -148,6 +164,7 @@ if (currentPage.includes('question.html')) {
         score = 0;
 
         const source = localStorage.getItem('questionSource');
+        console.log('Fuente de preguntas', source);
 
         if (source === 'local') {
             const { getQuestionsLocal } = await import('./data.js');
@@ -156,6 +173,7 @@ if (currentPage.includes('question.html')) {
             const { getMixedQuestions } = await import('./data.js');
             questions = await getMixedQuestions();
         } else {
+            const { getQuestionsFromAPI } = await import('./data.js');
             questions = await getQuestionsFromAPI();
         }
 
@@ -246,4 +264,3 @@ if (currentPage.includes('results.html')) {
         });
     }
 }
-

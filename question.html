@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz - Preguntas</title>
-    <link rel="stylesheet" href="./css/base.css">
-    <link rel="stylesheet" href="./css/layout.css">
-    <link rel="stylesheet" href="./css/components.css">
-    <link rel="stylesheet" href="./css/buttons.css">
-    <link rel="stylesheet" href="./css/quiz.css">
-    <link rel="stylesheet" href="./css/results.css">
-    <link rel="stylesheet" href="./css/home.css">  
-    <link rel="stylesheet" href="./css/responsive.css">
-  </head>
-  <body class="question-body">
-  
-    <nav>
-      <ul class="nav">
-        <li>
-          <a href="home.html" id="nav-home" class="nav-btn">Home</a>
-        </li>
-        <li>
-          <a href="results.html" id="nav-results" class="nav-btn">Resultados</a>
-        </li>
-      </ul>
-    </nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quiz - Preguntas</title>
+        <link rel="stylesheet" href="./css/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="question-body">
+        <nav>
+            <ul class="nav">
+                <li>
+                    <a href="home.html" id="nav-home" class="nav-btn">Home</a>
+                </li>
+                <li>
+                    <a href="results.html" id="nav-results" class="nav-btn"
+                        >Resultados</a
+                    >
+                </li>
+            </ul>
+        </nav>
 
-    
-    <section id="quiz-container">
-      <div class="quiz-card">
-        <h2 class="quiz-title">¡Preguntas del Quiz!</h2>
-        <h3 id="question-number">
-           <span id="current-question">1</span> / 10
-        </h3>
-        <div id="question-container">
-          <div id="question" class="quiz-question">Aquí va la pregunta</div>
-          <div id="answer-buttons" class="btn-grid"></div>
-        </div>
-        <button id="next-btn" class="btn next-btn hide">Siguiente</button>
-      </div>
-    </section>
+        <section id="quiz-container">
+            <div class="quiz-card">
+                <h2 class="quiz-title">Pregunta</h2>
+                <h3 id="question-number">
+                    <span id="current-question">1</span> / 10
+                </h3>
+                <div id="question-container">
+                    <div id="question" class="quiz-question">
+                        Aquí va la pregunta
+                    </div>
+                    <div id="answer-buttons" class="btn-grid"></div>
+                </div>
+                <button id="next-btn" class="btn next-btn hide">
+                    Siguiente
+                </button>
+            </div>
+        </section>
 
-    <footer>
-      <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
-    </footer>
+        <footer>
+            <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
+        </footer>
 
-    <script type="module" src="./js/main.js"></script>
-  </body>
+        <script type="module" src="./js/main.js"></script>
+    </body>
 </html>
-

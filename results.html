@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resultados</title>
-  <link rel="stylesheet" href="./css/base.css">
-  <link rel="stylesheet" href="./css/layout.css">
-  <link rel="stylesheet" href="./css/components.css">
-  <link rel="stylesheet" href="./css/buttons.css">
-  <link rel="stylesheet" href="./css/quiz.css">
-  <link rel="stylesheet" href="./css/results.css">
-  <link rel="stylesheet" href="./css/home.css"> 
-  <link rel="stylesheet" href="./css/responsive.css">
-</head>
-<body class="results-body">
-  <nav>
-    <ul class="nav">
-      <li><a href="home.html" class="nav-btn">Home</a></li>
-      <li><a href="question.html" class="nav-btn">Resultados</a></li>
-    </ul>
-  </nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Resultados</title>
+        <link rel="stylesheet" href="./css/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="results-body">
+        <nav>
+            <ul class="nav">
+                <li><a href="home.html" class="nav-btn">Home</a></li>
+                <li><a href="question.html" class="nav-btn">Resultados</a></li>
+            </ul>
+        </nav>
 
-  <main class="results-container">
-    <div class="results-card">
-      <div class="score-circle">
-        <span id="score">10</span>
-        <p>/10</p>
-      </div>
-      <div class="results-info">
-        <h2>Resultado Final</h2>
-        <p>¡Has terminado el quiz!<br /></p>
-        <a href="home.html" class="btn btn-retry">Jugar otra vez</a>
-      </div>
-    </div>
-  </main>
+        <main class="results-container">
+            <div class="results-card">
+                <div class="score-circle">
+                    <span id="score">10</span>
+                    <p>/10</p>
+                </div>
+                <div class="results-info">
+                    <h2>Resultado Final</h2>
+                    <p id="result-message"></p>
+                    <a href="home.html" class="btn btn-retry"
+                        >Volver al inicio</a
+                    >
+                </div>
+            </div>
+        </main>
 
-  <footer>
-    <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
-  </footer>
+        <footer>
+            <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
+        </footer>
 
-  <script type="module" src="./js/main.js"></script>
-</body>
+        <script type="module" src="./js/main.js"></script>
+        <script type="module" src="./js/results.js"></script>
+    </body>
 </html>
-

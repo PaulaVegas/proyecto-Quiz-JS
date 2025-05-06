@@ -1,94 +1,72 @@
-![logotipo de The Bridge](https://user-images.githubusercontent.com/27650532/77754601-e8365180-702b-11ea-8bed-5bc14a43f869.png 'logotipo de The Bridge')
+# Proyecto Quiz SPA 🧠✨
 
-# [Bootcamp Web Developer Full Stack](https://www.thebridge.tech/bootcamps/bootcamp-fullstack-developer/)
-
-### JS, ES6, Node.js, Frontend, Backend, Express, React, MERN, testing, DevOps
-
-## EJERCICIO: Proyecto conjunto de creación de Quiz :octocat: :loudspeaker: :bangbang:
-
-**Objetivo**
-
--   El Quiz constará de 10 preguntas. Cada pregunta tendrá 4 opciones y sólo una de ellas será la correcta.
--   Podrán ser preguntas nuestras y preguntas que vengan de https://opentdb.com/
--   La aplicación tendrá que ser una **SPA** _(single-page application)_. Sólo una pregunta cada vez en pantalla.
-
-**Requisitos para este proyecto**
-
--   Manipulación dinámica del **DOM**
--   Crear una página **SPA** para las preguntas
--   Manejo de **ES6**
--   **Asincronía**. Usar API de preguntas https://opentdb.com/
--   APIs HTML5: Uso de **Local storage y gráficas**, etc...
--   Sin frameworks ni librerias externas en la medida de lo posible
--   Gestión del proyecto en **Github** desde el principio. Uso de ramas, fork, pull request, etc...
--   Código limpio, **buenas prácticas**
-
-**Opcional**
-
--   Otras APIs, mix de preguntas de distinas fuentes...
--   En general, cualquier extra será bien recibido para que investiguéis por vuestra cuenta, siempre y cuando tenga sentido
+Este proyecto es una **Single Page Application (SPA)** que permite a los usuarios realizar un quiz de preguntas y ver sus resultados visualizados en gráficas. Fue desarrollado con HTML, CSS y JavaScript, y organiza el código en módulos para mantener una estructura clara y escalable.
 
 ---
 
+## 📁 Estructura del Proyecto
+
+```
+📦 Proyecto-Quiz-SPA
+├── home.html
+├── question.html
+├── results.html
+├── js/
+│   ├── main.js
+│   ├── data.js
+│   └── results.js
+├── css/
+│   ├── base.css          # Reset, variables,
+│   ├── layout.css        # Diseño: header, main,
+│   ├── components.css    # Botones, tarjetas
+│   ├── quiz.css          # Estilos específicos
+│   ├── results.css       # vista de resultados
+│   ├── home.css          # vista principal (home)
+│   └── responsive.css    # Media queries y móviles
+├── assets/
+│   └── (imágenes opcionales, íconos, etc.)
+└── README.md
+```
+
 ---
 
-## FASES
+## 🚀 Funcionalidades principales
+
+-   Selección de tipo de preguntas: **API, Local o Mixto**
+-   Selección de dificultad: Fácil, medio o difícil.
+-   Componente dinámico de preguntas y respuestas
+-   Registro de puntajes en **localStorage**
+-   Visualización de resultados con **Chart.js**
+-   Responsive para uso en móviles y tablets
 
 ---
 
-### FASE 1: Diseño del front
+## 🧩 Tecnologías usadas
 
--   Diseño responsive, mobile first, semántica HTML5
+-   HTML5 + CSS3
+-   JavaScript moderno (ES Modules)
+-   Chart.js para visualización de resultados
+-   localStorage para persistencia de datos
 
-### FASE 2: Lógica de JavaScript
+---
 
--   Ejemplo de enunciado para adaptar modelo de datos
--   [proyectos-quiz-resurrected](https://github.com/TheBridge-FullStackDeveloper/proyectos-quiz-resurrected)
-
--   Conseguir con 10 preguntas nuestras, guardadas en un array de objetos, se pueda jugar a nuestro Quiz. `[{..},{..},{..}...{..}]`
-
-### FASE 3: Asincronía
-
--   Javascript: Manejo de asincronía. Leer 10 preguntas random de la API de prenguntas para generar el Quiz
-
-### FASE 4 (avanzado) - APIs HTML5
-
--   Almacenar la puntuación de cada partida en un array de objetos `[{..},{..},{..}...{..}]` en Local Storage. Guardar puntuación y fecha en cada objeto del array
-
--   Mostrar en la Home con una gráfica los resultados de las últimas partidas jugadas (leer puntuaciones de LocalStorage). Representar Fecha(eje X) vs Puntuación(eje Y)
-
-### Páginas
-
--   `home.html`. Página de bienvenida + gráfica de últimos resultados
--   `question.html` SPA. Página para renderizar las 10 distintas preguntas
--   `results.html` Página para mostrar resultado del quiz
-
-### Vista móvil
-
-![Logo](./assets/mobile.png)
-
-### Vista pc/tablet
-
-![Logo](./assets/home.png)
-![Logo](./assets/quiz.png)
-![Logo](./assets/results.png)
-
-## API Reference
+## API Usada
 
 #### The-Trivia-API
 
 https://the-trivia-api.com
 
-### Preguntas propias
+## 📌 Cómo usar el proyecto
 
-## Features
+1. Clona el repositorio o descarga el ZIP
+2. Abre `home.html` en tu navegador
+3. Selecciona un tipo de preguntas y comienza el quiz 🎉
 
--   Mobile first, responsive design
--   Elección de fuente de las preguntas
--   Elección de dificultad
--   Facilidad de uso
+---
 
-## Authors
+## 🧑‍💻 Créditos
+
+Desarrollado por **Paula & Elida** como parte del proyecto de aprendizaje en desarrollo web 🥳
 
 -   [@Elimila](https://www.github.com/elimila)
 -   [@PaulaVegas](https://www.github.com/PaulaVegas)

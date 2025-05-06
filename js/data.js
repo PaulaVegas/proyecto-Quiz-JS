@@ -1,6 +1,7 @@
-// Funcion para obtener preguntas de la API
 export async function getQuestionsFromAPI() {
-    const url = 'https://the-trivia-api.com/api/questions?limit=10';
+    const difficulty = localStorage.getItem('difficulty');
+    const url = `https://the-trivia-api.com/api/questions?limit=10&difficulty=${difficulty}`;
+
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -12,7 +13,7 @@ export async function getQuestionsFromAPI() {
             return {
                 question: item.question,
                 answers: shuffled.map(text => ({
-                    text: text,
+                    text,
                     correct: text === item.correctAnswer,
                 })),
             };
