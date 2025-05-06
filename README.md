@@ -6,8 +6,9 @@ Este proyecto es una **Single Page Application (SPA)** que permite a los usuario
 
 ## 📁 Estructura del Proyecto
 
-
 📦proyecto-Quiz-JS/
+
+```
 │
 ├── assets/                          # Archivos multimedia del proyecto
 │   ├── home.png                     # Captura de la vista Home
@@ -36,7 +37,7 @@ Este proyecto es una **Single Page Application (SPA)** que permite a los usuario
 │
 ├── README.md                        # Documentación del proyecto y cómo ejecutarlo
 └── .prettierrc                      # Configuración de formato de código (opcional)
-
+```
 
 ## 🚀 Funcionalidades principales
 
