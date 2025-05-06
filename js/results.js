@@ -22,8 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (resultMessageElement) {
         resultMessageElement.innerText = message;
     }
+    // 4. Jugar de nuevo
+    document.getElementById('play-again').addEventListener('click', () => {
+        window.location.href = 'question.html';
+    });
 
-    // 6. Volver al inicio
+    // 5. Volver al inicio
     document.getElementById('go-home').addEventListener('click', () => {
         window.location.href = 'home.html';
     });

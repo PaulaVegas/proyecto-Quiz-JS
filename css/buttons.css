@@ -99,3 +99,17 @@
 .btn-retry:hover {
   background-color: #005fa3;
 }
+
+.btn-replay {
+  background-color: #e74c3c;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-replay:hover {
+  background-color: #c0392b;
+}
