@@ -4,10 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz SPA</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/buttons.css">
+    <link rel="stylesheet" href="./css/quiz.css">
+    <link rel="stylesheet" href="./css/results.css">
+    <link rel="stylesheet" href="./css/home.css"> 
+    <link rel="stylesheet" href="./css/responsive.css">>
   </head>
-  <body>
-    <!-- Navegación -->
+  <body class="home-body">
+   
     <nav>
       <ul class="nav">
         <li>
@@ -19,7 +26,7 @@
       </ul>
     </nav>
 
-    <!-- Contenido principal -->
+   
     <main class="home-main">
       <!-- Tarjeta de bienvenida -->
       <div class="card welcome-card">
@@ -35,16 +42,14 @@
       <!-- Tarjeta de estadísticas -->
       <div class="card chart-card">
         <h2> Últimos Resultados</h2>
-        <canvas id="historyChart" width="300" height="200"></canvas>
+        <canvas id="historyChart" width="600" height="400"></canvas>
       </div>
     </main>
 
-    <!-- Footer -->
     <footer>
       <p>Proyecto SPA desarrollado por Paula y Elida 👩‍💻</p>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script type="module" src="./js/main.js"></script>
   </body>

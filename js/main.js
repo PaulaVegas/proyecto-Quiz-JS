@@ -1,9 +1,6 @@
 //Enganchamos la función getQuestionsFromAPI en el main.js
 import { getQuestionsFromAPI, getQuestionsLocal } from './data.js';
 
-//Testing log
-// console.log('main.js enganchado, menos mal');
-
 // Saber en qué página estamos
 const currentPage = window.location.pathname;
 
@@ -54,10 +51,6 @@ if (
                     {
                         label: 'Puntuación',
                         data: puntuaciones,
-                        barPercentage: 0.5,
-                        barThickness: 80,
-                        maxBarThickness: 80,
-                        minBarLength: 2,
                         backgroundColor: colorines,
                         hoverBackgroundColor: colorinesHover,
                         borderWidth: 1,
@@ -67,16 +60,38 @@ if (
                 ],
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Historial de puntuaciones'
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true,
                         max: 10,
+                        title: {
+                            display: true,
+                            text: 'Puntaje'
+                        }
                     },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Fecha'
+                        }
+                    }
                 },
             },
         });
     }
 }
+
 // Botones para elegir fuente de preguntas
 const btnAPI = document.getElementById('btn-api');
 const btnLocal = document.getElementById('btn-local');
@@ -84,20 +99,20 @@ const btnMixed = document.getElementById('btn-mixed');
 
 if (btnAPI) {
     btnAPI.addEventListener('click', () => {
-        localStorage.setItem('questionSource', 'api'); // Guardamos el tipo de fuente
+        localStorage.setItem('questionSource', 'api');
         window.location.href = 'question.html';
     });
 }
 
 if (btnLocal) {
     btnLocal.addEventListener('click', () => {
-        localStorage.setItem('questionSource', 'local'); // Guardamos el tipo de fuente
+        localStorage.setItem('questionSource', 'local');
         window.location.href = 'question.html';
     });
 }
 if (btnMixed) {
     btnMixed.addEventListener('click', () => {
-        localStorage.setItem('questionSource', 'mixed'); // Guardamos el tipo de fuente
+        localStorage.setItem('questionSource', 'mixed');
         window.location.href = 'question.html';
     });
 }
@@ -108,19 +123,18 @@ if (currentPage.includes('question.html')) {
     const quizView = document.getElementById('quiz');
     const resultsView = document.getElementById('results');
 
-    const startBtn = document.getElementById('start-btn'); //?
+    const startBtn = document.getElementById('start-btn');
     const nextBtn = document.getElementById('next-btn');
     const goHomeBtn = document.getElementById('go-home');
     const questionEl = document.getElementById('question');
     const answerButtonsEl = document.getElementById('answer-buttons');
-    const scoreSpan = document.getElementById('score'); //?
+    const scoreSpan = document.getElementById('score');
     const currentQuestionSpan = document.getElementById('current-question');
 
-    let questions = []; // Inicializamos el array de preguntas
-    let currentQuestionIndex = 0; // Inicializamos el índice de la pregunta actual
-    let score = 0; // Inicializamos el puntaje
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
 
-    // Función para mostrar la vista correspondiente
     function showView(view) {
         homeView?.classList.add('hide');
         quizView?.classList.add('hide');
@@ -128,12 +142,10 @@ if (currentPage.includes('question.html')) {
         view?.classList.remove('hide');
     }
 
-    // Función para inicializar el quiz y cargar las preguntas
     async function initializeQuiz() {
         showView(quizView);
         currentQuestionIndex = 0;
         score = 0;
-        //questions = await getQuestionsFromAPI();
 
         const source = localStorage.getItem('questionSource');
 
@@ -156,7 +168,6 @@ if (currentPage.includes('question.html')) {
         prepareNextQuestion();
     }
 
-    // Función para preparar la siguiente pregunta
     function prepareNextQuestion() {
         resetState();
         if (currentQuestionSpan) {
@@ -165,7 +176,6 @@ if (currentPage.includes('question.html')) {
         displayQuestion(questions[currentQuestionIndex]);
     }
 
-    // Función para mostrar la pregunta y sus respuestas
     function displayQuestion(question) {
         questionEl.innerText = question.question;
         question.answers.forEach(answer => {
@@ -178,7 +188,6 @@ if (currentPage.includes('question.html')) {
         });
     }
 
-    // Función para reiniciar el estado del quiz
     function resetState() {
         nextBtn.classList.add('hide');
         while (answerButtonsEl.firstChild) {
@@ -186,23 +195,21 @@ if (currentPage.includes('question.html')) {
         }
     }
 
-    // Función para manejar la selección de respuesta
     function selectAnswer(e) {
         const selected = e.target;
         const correct = selected.dataset.correct === 'true';
-        if (correct) score++; // Incrementar el puntaje si la respuesta es correcta
+        if (correct) score++;
 
         Array.from(answerButtonsEl.children).forEach(btn => {
             btn.disabled = true;
             btn.classList.add(
-                btn.dataset.correct === 'true' ? 'correct' : 'wrong' // Agregar clase 'wrong' a las incorrectas
+                btn.dataset.correct === 'true' ? 'correct' : 'wrong'
             );
         });
 
         if (questions.length > currentQuestionIndex + 1) {
-            nextBtn.classList.remove('hide'); // Mostrar botón "Siguiente" si hay más preguntas
+            nextBtn.classList.remove('hide');
         } else {
-            // Si no hay más preguntas, mostrar el puntaje final
             localStorage.setItem('lastScore', score);
             const history = JSON.parse(localStorage.getItem('history')) || [];
             history.push({ date: new Date().toLocaleDateString(), score });
@@ -212,33 +219,31 @@ if (currentPage.includes('question.html')) {
             }, 1000);
         }
     }
-    // Agregar evento al botón "Iniciar"
+
     nextBtn?.addEventListener('click', () => {
         currentQuestionIndex++;
         prepareNextQuestion();
     });
-    // Agregar evento al botón "volver al inicio"
+
     goHomeBtn?.addEventListener('click', () => {
         window.location.href = 'home.html';
     });
 
-    // Iniciar automáticamente el quiz al cargar la página
     initializeQuiz();
 }
 
-// Si estamos en results.html, mostrar el puntaje y permitir volver al inicio
 if (currentPage.includes('results.html')) {
-    const scoreSpan = document.getElementById('score'); // Traer el elemento del puntaje
-    const score = localStorage.getItem('lastScore') || 0; // Traer el puntaje desde localStorage
+    const scoreSpan = document.getElementById('score');
+    const score = localStorage.getItem('lastScore') || 0;
     if (scoreSpan) {
-        scoreSpan.innerText = score; // Mostrar el puntaje en pantalla
+        scoreSpan.innerText = score;
     }
 
     const goHomeBtn = document.getElementById('go-home');
     if (goHomeBtn) {
         goHomeBtn.addEventListener('click', () => {
-            // Agregar evento al botón "volver al inicio"
             window.location.href = 'home.html';
         });
     }
 }
+

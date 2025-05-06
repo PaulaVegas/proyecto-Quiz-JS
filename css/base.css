@@ -1,0 +1,69 @@
+/* =========================
+   Variables de diseño
+========================= */
+:root {
+  --primary-color: #3498db;
+  --primary-hover: #2980b9;
+  --correct-color: #2ecc71;
+  --wrong-color: #e74c3c;
+  --text-color: #333;
+  --bg-color: #f0eded;
+  --nav-color: #333;
+  --nav-hover: #00acee;
+}
+
+/* =========================
+   Reset básico
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Estilos globales
+========================= */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 20px;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin: 10px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1rem;
+  margin: 20px;
+}
+
+/* =========================
+   Clases utilitarias
+========================= */
+.hide {
+  display: none;
+}
+
+/* =========================
+   Animación de entrada
+========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

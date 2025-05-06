@@ -1,0 +1,64 @@
+/* =========================
+   Navegación
+========================= */
+nav {
+  background-color: var(--nav-color);
+  padding: 40px;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.nav li {
+  font-size: 1.2rem;
+}
+
+.nav-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.nav-btn:hover,
+.nav-btn:focus {
+  color: var(--nav-hover);
+  outline: none;
+}
+
+/* =========================
+   Contenedores generales
+========================= */
+header, main, footer {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+/* =========================
+   Footer
+========================= */
+footer {
+  margin-top: 50px;
+  text-align: center;
+  color: #888;
+}
+
+/* =========================
+   Fondo para home
+========================= */
+.home-body {
+  background-color: #d5ecf9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

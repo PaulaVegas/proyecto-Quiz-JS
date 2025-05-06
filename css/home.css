@@ -1,0 +1,64 @@
+.home-body {
+    background-color: #d5ecf9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .home-main {
+    background-color: #d5ecf9;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+  }
+  
+  /* Estilo general de las tarjetas */
+  .card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .welcome-card {
+    width: 400px;
+  }
+  
+  .chart-card {
+    width: 600px;
+  }
+  
+  /* Títulos dentro de las tarjetas */
+  .welcome-card h2,
+  .chart-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo del gráfico */
+  .chart-card canvas {
+    width: 100% !important;
+    height: 400px !important;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* Responsive home */
+  @media (max-width: 768px) {
+    .home-main {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+  
+    .card {
+      width: 90%;
+    }
+  }
+  

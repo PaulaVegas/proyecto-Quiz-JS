@@ -1,0 +1,101 @@
+/* =========================
+   Botones generales
+========================= */
+.btn {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 250px;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: var(--primary-hover);
+  outline: none;
+}
+
+/* =========================
+   Botón Siguiente
+========================= */
+.next-btn {
+  font-size: 1rem;
+  padding: 12px 24px;
+  width: 140px;
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border-radius: 6px;
+  text-align: center;
+  margin: auto;
+  display: block;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+.next-btn:hover {
+  background-color: #444;
+}
+
+/* =========================
+   Botones API, Local, Mixed
+========================= */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.btn-api {
+  background-color: #e67e22;
+}
+
+.btn-api:hover {
+  background-color: #ca6f1e;
+}
+
+.btn-local {
+  background-color: #9b59b6;
+}
+
+.btn-local:hover {
+  background-color: #884ea0;
+}
+
+.btn-start {
+  background-color: #0077c8;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-start:hover {
+  background-color: #005fa3;
+}
+
+.btn-retry {
+  background-color: #0077c8;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-retry:hover {
+  background-color: #005fa3;
+}
