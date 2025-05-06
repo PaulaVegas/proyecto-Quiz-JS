@@ -101,7 +101,7 @@
 }
 
 .btn-replay {
-  background-color: #e74c3c;
+  background-color: #4fb146;
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
@@ -111,5 +111,5 @@
 }
 
 .btn-replay:hover {
-  background-color: #c0392b;
+  background-color: #3a8e3a;
 }
