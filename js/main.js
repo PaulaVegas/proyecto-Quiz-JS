@@ -96,15 +96,11 @@ const startBtn = document.getElementById('startBtn');
 const difficultySelect = document.getElementById('difficulty');
 
 //Para elegir la dificultad
-if (difficultySelect && startBtn) {
-    difficultySelect.addEventListener('change', () => {
-        const selectedDifficulty = difficultySelect.value;
-        localStorage.setItem('difficulty', selectedDifficulty);
-    });
-
+if (startBtn && difficultySelect) {
     startBtn.addEventListener('click', () => {
         const selectedDifficulty = difficultySelect.value;
         localStorage.setItem('difficulty', selectedDifficulty);
+        localStorage.setItem('questionSource', 'api'); // default source for Start button
         window.location.href = 'question.html';
     });
 }
@@ -112,13 +108,6 @@ if (difficultySelect && startBtn) {
 // Botones para elegir fuente de preguntas
 const btnLocal = document.getElementById('btn-local');
 const btnMixed = document.getElementById('btn-mixed');
-
-if (startBtn) {
-    startBtn.addEventListener('click', () => {
-        localStorage.setItem('questionSource', 'api');
-        window.location.href = 'question.html';
-    });
-}
 
 if (btnLocal) {
     btnLocal.addEventListener('click', () => {
@@ -138,6 +127,7 @@ if (currentPage.includes('question.html')) {
     const homeView = document.getElementById('home');
     const quizView = document.getElementById('quiz');
     const resultsView = document.getElementById('results');
+    let quizFinished = false;
 
     const startBtn = document.getElementById('start-btn');
     const nextBtn = document.getElementById('next-btn');
@@ -159,6 +149,7 @@ if (currentPage.includes('question.html')) {
     }
 
     async function initializeQuiz() {
+        console.log('Iniciando el quiz...');
         showView(quizView);
         currentQuestionIndex = 0;
         score = 0;
@@ -214,6 +205,8 @@ if (currentPage.includes('question.html')) {
     }
 
     function selectAnswer(e) {
+        if (quizFinished) return; // prevent duplicate handling
+
         const selected = e.target;
         const correct = selected.dataset.correct === 'true';
         if (correct) score++;
@@ -228,9 +221,18 @@ if (currentPage.includes('question.html')) {
         if (questions.length > currentQuestionIndex + 1) {
             nextBtn.classList.remove('hide');
         } else {
+            quizFinished = true; // prevent re-entry
             localStorage.setItem('lastScore', score);
+            const now = new Date();
+            const dateTime =
+                now.toLocaleDateString() +
+                ' ' +
+                now.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                });
             const history = JSON.parse(localStorage.getItem('history')) || [];
-            history.push({ date: new Date().toLocaleDateString(), score });
+            history.push({ date: dateTime, score });
             localStorage.setItem('history', JSON.stringify(history));
             setTimeout(() => {
                 window.location.href = 'results.html';

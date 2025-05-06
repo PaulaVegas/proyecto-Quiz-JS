@@ -5,16 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Mostrarlo en pantalla
     document.getElementById('score').innerText = score || 0;
 
-    // 3. Guardarlo junto a la fecha en el historial
-    const history = JSON.parse(localStorage.getItem('history')) || [];
-
-    history.push({
-        date: new Date().toLocaleDateString(),
-        score: parseInt(score),
-    });
-
-    localStorage.setItem('history', JSON.stringify(history));
-
+    // 3. Mensaje personalizado según el puntaje
     let message = '';
     if (score >= 8) {
         message = '¡Se nota que has estudiado!';
